@@ -1,0 +1,68 @@
+@property --foxhole-background {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #2c2c2c;
+}
+
+@property --foxhole-foreground {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #737473;
+}
+
+@property --foxhole-foreground-main {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0a0a0a;
+}
+
+@property --foxhole-foreground-alt {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: 1b1b1b;
+}
+
+@property --foxhole-not-selected {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #343434;
+}
+
+@property --foxhole-hover {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #e77c48;
+}
+
+:root {
+  --discrete-ease-in: all 300ms ease-in-out allow-discrete;
+  --is-sm: false;
+  --is-md: false;
+  --is-lg: false;
+  --is-xl: false;
+  --is-2xl: false;
+
+  @media (width >= 640px) {
+    --is-sm: true;
+  }
+
+  @media (width >= 768px) {
+    --is-md: true;
+  }
+
+  @media (width >= 1024px) {
+    --is-lg: true;
+  }
+
+  @media (width >= 1280px) {
+    --is-xl: true;
+  }
+
+  @media (width >= 1536px) {
+    --is-2xl: true;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    --discrete-ease-in: all 0ms ease-in-out allow-discrete;
+  }
+}
