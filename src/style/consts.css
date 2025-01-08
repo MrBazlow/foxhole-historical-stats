@@ -16,12 +16,6 @@
   initial-value: #0a0a0a;
 }
 
-@property --foxhole-foreground-alt {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: 1b1b1b;
-}
-
 @property --foxhole-not-selected {
   syntax: "<color>";
   inherits: false;

@@ -231,14 +231,22 @@ class FoxholePlayer extends HTMLElement {
 
   private user: HTMLAnchorElement;
 
+  private newWindowIcon: SVGElement;
+
   public constructor() {
     super();
 
     this.rank = this.ownerDocument.createElement("span");
     this.commend = this.ownerDocument.createElement("span");
     this.user = this.ownerDocument.createElement("a");
+    this.newWindowIcon = this.ownerDocument.createElementNS("http://www.w3.org/2000/svg", "svg");
+    this.newWindowIcon.ariaHidden = "true";
+    const useElement = this.ownerDocument.createElementNS("http://www.w3.org/2000/svg", "use");
+    useElement.href.baseVal = "#new-window-icon";
+    this.newWindowIcon.appendChild(useElement);
     this.user.referrerPolicy = "no-referrer";
     this.user.target = "_blank";
+    this.user.setAttribute("aria-describedby", "new-win-desc");
 
     this.append(this.rank, this.commend, this.user);
   }
@@ -251,6 +259,7 @@ class FoxholePlayer extends HTMLElement {
       }
       case "username": {
         this.user.textContent = newValue;
+        this.user.append(this.newWindowIcon);
         break;
       }
       case "commends": {
@@ -512,17 +521,17 @@ class FoxholeWarDisplay extends HTMLElement {
 }
 
 class FoxholePlayerSearch extends HTMLElement {
-  public userInput: HTMLInputElement;
+  private userInput: HTMLInputElement;
 
-  public resultsList: HTMLDivElement;
+  private resultsList: HTMLDivElement;
 
   private _virtualList: VirtualList | undefined;
 
-  public boundInputHandler: (event: Event) => void;
+  private boundInputHandler: (event: Event) => void;
 
-  public boundChangeHandler: () => void;
+  private boundChangeHandler: () => void;
 
-  public boundFocusInHandler: (event: Event) => void;
+  private boundFocusInHandler: (event: Event) => void;
 
   public get virtualList(): VirtualList {
     if (this._virtualList === undefined) {
@@ -558,7 +567,7 @@ class FoxholePlayerSearch extends HTMLElement {
     this.boundFocusInHandler = this.handleFocusIn.bind(this);
   }
 
-  handleUserInput(event: Event) {
+  private handleUserInput(event: Event): void {
     event.preventDefault();
     this.resultsList.innerHTML = "";
 
@@ -589,12 +598,12 @@ class FoxholePlayerSearch extends HTMLElement {
     }
   }
 
-  handleSelectedWarReset() {
+  private handleSelectedWarReset(): void {
     this.resultsList.innerHTML = "";
     this.userInput.value = "";
   }
 
-  private handleFocusIn(event: Event) {
+  private handleFocusIn(event: Event): void {
     const target = event.target;
 
     if (!(target instanceof Node) || this.contains(target)) {
@@ -604,14 +613,14 @@ class FoxholePlayerSearch extends HTMLElement {
     this.resultsList.innerHTML = "";
   }
 
-  connectedCallback() {
+  public connectedCallback(): void {
     this.userInput.addEventListener("input", this.boundInputHandler);
     this.ownerDocument.addEventListener("focusin", this.boundFocusInHandler);
     this.ownerDocument.addEventListener("click", this.boundFocusInHandler);
     stateManager.addEventListener("selectedWar", this.boundChangeHandler);
   }
 
-  disconnectedCallback() {
+  public disconnectedCallback(): void {
     this.userInput.removeEventListener("input", this.boundInputHandler);
     this.ownerDocument.removeEventListener("focusin", this.boundFocusInHandler);
     this.ownerDocument.addEventListener("click", this.boundFocusInHandler);

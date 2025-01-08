@@ -417,6 +417,10 @@ foxhole-war-display {
         & > foxhole-player-search {
           position: relative;
 
+          & > label {
+            padding-right: 0.5rem;
+          }
+
           & > input {
             background-color: rgb(from var(--foxhole-foreground-main) r g b / 0.5);
 
@@ -515,6 +519,24 @@ foxhole-player {
     flex-grow: 1;
     flex-shrink: 0;
     text-wrap: nowrap;
+    gap: 0.25rem;
+    align-items: center;
+
+    & > svg {
+      display: none;
+    }
+
+    &:hover {
+      color: var(--foxhole-hover);
+      text-decoration: underline;
+
+      & > svg {
+        display: inline-block;
+        height: 1rem;
+        width: 1rem;
+        stroke: var(--foxhole-hover);
+      }
+    }
   }
 
   & > span {
