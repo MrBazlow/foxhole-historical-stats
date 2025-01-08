@@ -559,7 +559,7 @@ class FoxholePlayerSearch extends HTMLElement {
     const results: { index: number; player: HTMLElement }[] = [];
 
     for (const [index, player] of this.virtualList.items.entries()) {
-      if (player.getAttribute("username")?.includes(this.userInput.value)) {
+      if (player.getAttribute("username")?.toLowerCase().includes(this.userInput.value.toLowerCase())) {
         results.push({ index, player });
       }
     }
