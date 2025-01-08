@@ -521,6 +521,8 @@ class FoxholePlayerSearch extends HTMLElement {
 
   public boundChangeHandler: () => void;
 
+  public boundFocusInHandler: (event: Event) => void;
+
   public get virtualList(): VirtualList {
     if (this._virtualList === undefined) {
       throw new Error("No virtual list found");
@@ -552,12 +554,17 @@ class FoxholePlayerSearch extends HTMLElement {
     this.userInput = userInput;
     this.boundInputHandler = this.handleUserInput.bind(this);
     this.boundChangeHandler = this.handleSelectedWarReset.bind(this);
+    this.boundFocusInHandler = this.handleFocusIn.bind(this);
   }
 
   handleUserInput(event: Event) {
     event.preventDefault();
 
     this.resultsList.innerHTML = "";
+
+    if (this.userInput.value === "") {
+      return;
+    }
 
     const results: { index: number; player: HTMLElement }[] = [];
 
@@ -587,13 +594,27 @@ class FoxholePlayerSearch extends HTMLElement {
     this.userInput.value = "";
   }
 
+  private handleFocusIn(event: Event) {
+    const target = event.target;
+
+    if (!(target instanceof Node) || this.contains(target)) {
+      return;
+    }
+
+    this.resultsList.innerHTML = "";
+  }
+
   connectedCallback() {
     this.userInput.addEventListener("input", this.boundInputHandler);
+    this.ownerDocument.addEventListener("focusin", this.boundFocusInHandler);
+    this.ownerDocument.addEventListener("click", this.boundFocusInHandler);
     stateManager.addEventListener("selectedWar", this.boundChangeHandler);
   }
 
   disconnectedCallback() {
     this.userInput.removeEventListener("input", this.boundInputHandler);
+    this.ownerDocument.removeEventListener("focusin", this.boundFocusInHandler);
+    this.ownerDocument.addEventListener("click", this.boundFocusInHandler);
     stateManager.removeEventListener("selectedWar", this.boundChangeHandler);
   }
 }
