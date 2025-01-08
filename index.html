@@ -24,7 +24,7 @@
         <h1>Foxhole Historical Stats</h1>
       </a>
       <foxhole-war-select>
-        <select>
+        <select aria-label="Select a war">
           <option value="0">Select a war</option>
           <option value="1">War #1</option>
           <option value="2">War #2</option>
@@ -124,13 +124,13 @@
         <div class="winner">
           <div class="conquest">
             <span>Conquest</span>
-            <img class="winning-faction" />
+            <img class="winning-faction" alt="Winning faction logo" />
           </div>
         </div>
         <div class="rankings">
           <div>
             <div>
-              <img src="/logo/colonial.png" class="faction" />
+              <img src="/logo/colonial.png" alt="Colonial Logo" />
               <span>Colonial</span>
               <foxhole-player-search class="colonial-search">
                 <input type="text" placeholder="Search" autocomplete="off" />
@@ -146,7 +146,7 @@
           </div>
           <div>
             <div>
-              <img src="/logo/warden.png" class="faction" />
+              <img src="/logo/warden.png" alt="Warden Logo" />
               <span>Warden</span>
               <foxhole-player-search class="warden-search">
                 <input type="text" placeholder="Search" autocomplete="off" />

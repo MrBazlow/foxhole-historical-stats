@@ -559,7 +559,6 @@ class FoxholePlayerSearch extends HTMLElement {
 
   handleUserInput(event: Event) {
     event.preventDefault();
-
     this.resultsList.innerHTML = "";
 
     if (this.userInput.value === "") {
@@ -569,7 +568,7 @@ class FoxholePlayerSearch extends HTMLElement {
     const results: { index: number; player: HTMLElement }[] = [];
 
     for (const [index, player] of this.virtualList.items.entries()) {
-      if (player.getAttribute("username")?.toLowerCase().includes(this.userInput.value.toLowerCase())) {
+      if (player.getAttribute("username")?.toLowerCase().includes(this.userInput.value.toLowerCase()) || player.getAttribute("steam-id")?.includes(this.userInput.value)) {
         results.push({ index, player });
       }
     }
