@@ -519,6 +519,8 @@ class FoxholePlayerSearch extends HTMLElement {
 
   public boundInputHandler: (event: Event) => void;
 
+  public boundChangeHandler: () => void;
+
   public get virtualList(): VirtualList {
     if (this._virtualList === undefined) {
       throw new Error("No virtual list found");
@@ -549,6 +551,7 @@ class FoxholePlayerSearch extends HTMLElement {
 
     this.userInput = userInput;
     this.boundInputHandler = this.handleUserInput.bind(this);
+    this.boundChangeHandler = this.handleSelectedWarReset.bind(this);
   }
 
   handleUserInput(event: Event) {
@@ -579,12 +582,19 @@ class FoxholePlayerSearch extends HTMLElement {
     }
   }
 
+  handleSelectedWarReset() {
+    this.resultsList.innerHTML = "";
+    this.userInput.value = "";
+  }
+
   connectedCallback() {
     this.userInput.addEventListener("input", this.boundInputHandler);
+    stateManager.addEventListener("selectedWar", this.boundChangeHandler);
   }
 
   disconnectedCallback() {
     this.userInput.removeEventListener("input", this.boundInputHandler);
+    stateManager.removeEventListener("selectedWar", this.boundChangeHandler);
   }
 }
 
