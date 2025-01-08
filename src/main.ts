@@ -181,7 +181,7 @@ class VirtualList extends HTMLElement {
     first = first < 0 ? 0 : first;
 
     if (this.lastRepaintY === undefined || Math.abs(this.scrollTop - this.lastRepaintY) > this.maxBuffer) {
-      this.renderChunk(first, this.screenItemsLen * 2);
+      this.renderChunk(first, this.screenItemsLen * 2.5);
       this.lastRepaintY = this.scrollTop;
     }
 
@@ -212,7 +212,7 @@ class VirtualList extends HTMLElement {
   connectedCallback() {
     this.addEventListener("scroll", this);
     this.screenItemsLen = Math.ceil(this.clientHeight / this.itemHeight);
-    this.renderChunk(0, this.screenItemsLen * 2);
+    this.renderChunk(0, this.screenItemsLen * 2.5);
   }
 
   disconnectedCallback() {
@@ -504,6 +504,7 @@ class FoxholeWarDisplay extends HTMLElement {
       this.loading.hidden = true;
 
       this.winner.src = warData.winner === "warden" ? "./logo/warden.png" : "./logo/colonial.png";
+      this.winner.alt = warData.winner === "warden" ? "Warden victory" : "Colonial victory";
 
       this.downloadButton.href = importPath;
     })();
