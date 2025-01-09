@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
-@import url("./style/consts.css");
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+@import url('./style/consts.css');
 
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
@@ -22,7 +22,7 @@ html,
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   tab-size: 4;
-  font-family: "Jost", sans-serif;
+  font-family: 'Jost', sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -84,9 +84,9 @@ select {
 }
 
 button,
-input:where([type="button"]),
-input:where([type="reset"]),
-input:where([type="submit"]) {
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
   -webkit-appearance: button;
   appearance: button;
   background-color: transparent;
@@ -110,7 +110,7 @@ progress {
   height: auto;
 }
 
-[type="search"] {
+[type='search'] {
   -webkit-appearance: textfield;
   appearance: textfield;
   outline-offset: -2px;
@@ -177,7 +177,7 @@ textarea::placeholder {
 }
 
 button,
-[role="button"] {
+[role='button'] {
   cursor: pointer;
 }
 
@@ -203,7 +203,7 @@ video {
   height: auto;
 }
 
-[hidden]:where(:not([hidden="until-found"])) {
+[hidden]:where(:not([hidden='until-found'])) {
   display: none;
 }
 
@@ -218,7 +218,7 @@ header {
   margin: 0.5rem auto;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background-color: var(--foxhole-foreground);
@@ -293,7 +293,7 @@ foxhole-war-display {
   }
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background-color: rgb(from var(--foxhole-foreground-main) r g b / 0.5);
@@ -543,7 +543,7 @@ foxhole-player {
   & > span {
     &:first-of-type {
       &:before {
-        content: "#";
+        content: '#';
       }
     }
   }
